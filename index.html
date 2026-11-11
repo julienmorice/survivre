@@ -1,0 +1,1187 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Survivre</title>
+<meta name="description" content="Se préparer à une crise longue chez soi : de 72 heures à 30 jours d'autonomie. Plan personnalisé et repères issus des doctrines officielles.">
+<meta name="theme-color" content="#050505">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Thème par défaut : noir et rouge. Le thème clair reste disponible par le bouton. */
+:root{
+  --black:#050505;
+  --bg:#080808; --bg2:#0e0e0e; --card:#121212; --soft:#121212;
+  --ink:#f3f1ee; --muted:#9b9893; --line:#242424;
+  --red:#e3261c; --red-hi:#ff3b2f; --red-ink:#ff554a;
+  --red-soft:rgba(227,38,28,.10); --red-line:rgba(227,38,28,.5);
+  --max:1100px; --gut:clamp(16px,4vw,40px);
+  --sans:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --display:"Barlow Condensed","Oswald","Arial Narrow","Helvetica Neue",sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#f6f4f1; --bg2:#ebe8e3; --card:#ffffff; --soft:#ffffff;
+  --ink:#0b0b0b; --muted:#5d5a56; --line:#d8d4ce;
+  --red:#c8161c; --red-hi:#e01d17; --red-ink:#b3131a;
+  --red-soft:rgba(200,22,28,.07); --red-line:rgba(200,22,28,.4);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px;scrollbar-color:#3a3a3a var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+::selection{background:var(--red);color:#fff}
+a{color:inherit;text-decoration-color:var(--red);text-underline-offset:3px}
+a:hover{color:var(--red-ink)}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+.red{color:var(--red-ink)}
+.mono{font-family:var(--mono)}
+
+/* En-tête : toujours noir */
+header.top{position:sticky;top:0;z-index:20;background:rgba(5,5,5,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);color:#f3f1ee}
+.top .wrap{display:flex;align-items:center;gap:24px;height:56px}
+.brand{font:800 20px/1 var(--display);letter-spacing:.24em;text-decoration:none;white-space:nowrap;color:#fff}
+.brand:hover{color:#fff}
+.brand::after{content:"";display:inline-block;width:8px;height:8px;background:var(--red);margin-left:4px;vertical-align:2px;box-shadow:0 0 12px var(--red)}
+nav.menu{display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;font-size:13px;flex:1}
+nav.menu::-webkit-scrollbar{display:none}
+nav.menu a{text-decoration:none;color:rgba(255,255,255,.58);white-space:nowrap;padding:4px 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+nav.menu a:hover,nav.menu a.on{color:#fff;border-bottom-color:var(--red)}
+.theme{background:none;border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.7);font:12px var(--sans);padding:5px 9px;cursor:pointer}
+.theme:hover{border-color:var(--red);color:#fff}
+
+/* Ouverture : toujours noire */
+.hero{position:relative;overflow:hidden;background:var(--black);color:#f3f1ee;padding:clamp(64px,11vw,140px) 0 56px}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(55% 65% at 88% 8%,rgba(227,38,28,.38),transparent 62%),
+  radial-gradient(45% 55% at -5% 105%,rgba(227,38,28,.20),transparent 70%)}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:56px 56px;-webkit-mask-image:linear-gradient(to bottom,#000 20%,transparent 85%);mask-image:linear-gradient(to bottom,#000 20%,transparent 85%)}
+.hero .wrap{position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:600 12px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--red-ink);margin:0 0 18px;border:1px solid var(--red-line);padding:6px 12px;background:rgba(227,38,28,.08)}
+.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red)}
+.hero h1{font:800 clamp(84px,19vw,232px)/.82 var(--display);letter-spacing:.005em;margin:0 0 30px;text-transform:uppercase;color:#fff}
+.hero h1 span{color:var(--red);text-shadow:0 0 40px rgba(227,38,28,.55)}
+.hero p.lead{font-size:clamp(19px,2.4vw,24px);max-width:720px;margin:0 0 44px;line-height:1.45;color:rgba(255,255,255,.82)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(255,255,255,.18)}
+.facts div{padding:22px 24px 0 0;position:relative}
+.facts div::before{content:"";position:absolute;top:-1px;left:0;width:48px;height:3px;background:var(--red)}
+.facts b{display:block;font:800 clamp(44px,6vw,72px)/1 var(--display);margin-bottom:6px;color:#fff}
+.facts b i{font-style:normal;color:var(--red);font-size:.6em;margin-left:2px}
+.facts span{color:rgba(255,255,255,.6);font-size:14px}
+.alert-bar{margin-top:48px;padding:14px 18px;background:var(--red);color:#fff;font-size:15px;display:flex;gap:16px;align-items:center}
+.alert-bar::before{content:"!";flex:none;display:grid;place-items:center;width:34px;height:34px;background:#050505;color:var(--red-ink);font:800 22px/1 var(--display)}
+.alert-bar strong{color:#fff}
+.hazard{height:12px;background:repeating-linear-gradient(-45deg,var(--red) 0 14px,#050505 14px 28px)}
+
+/* Sections */
+section{padding:84px 0;border-bottom:1px solid var(--line)}
+section:nth-of-type(odd){background:var(--bg2)}
+.kicker{display:flex;align-items:center;gap:12px;font:600 12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--red-ink);margin:0 0 14px}
+.kicker::before{content:"";width:28px;height:2px;background:var(--red)}
+h2{font:800 clamp(38px,5.8vw,66px)/.95 var(--display);margin:0 0 22px;text-transform:uppercase;letter-spacing:.005em}
+h3{font-size:19px;margin:44px 0 14px;font-weight:700;display:flex;align-items:center;gap:10px}
+h3::before{content:"";width:8px;height:8px;background:var(--red);flex:none}
+h3:first-child{margin-top:0}
+.result-head h3::before{display:none}
+.intro{font-size:18px;max-width:760px;color:var(--ink);margin:0 0 32px;opacity:.9}
+p{max-width:760px}
+.muted{color:var(--muted)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+#pourquoi .cols3>div{padding:18px 0 0;border-top:1px solid var(--line)}
+#pourquoi .cols3>div strong{display:block;color:var(--ink);margin-bottom:4px}
+#pourquoi .cols3>div{color:var(--muted)}
+ul.clean{list-style:none;padding:0;margin:0}
+ul.clean li{padding:10px 0 10px 24px;border-bottom:1px solid var(--line);position:relative}
+ul.clean li::before{content:"";position:absolute;left:0;top:20px;width:10px;height:2px;background:var(--muted)}
+ul.clean li.c1::before{background:var(--red);height:3px;top:19px;box-shadow:0 0 8px var(--red-line)}
+ol.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+ol.steps li{counter-increment:s;padding:11px 0 11px 48px;border-bottom:1px solid var(--line);position:relative}
+ol.steps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:7px;font:800 24px/1.2 var(--display);color:var(--red)}
+.note{border-left:3px solid var(--red);padding:14px 18px;background:var(--red-soft);margin:28px 0;max-width:760px}
+.box{border:1px solid var(--line);padding:22px;background:var(--card);box-shadow:inset 0 3px 0 var(--red)}
+.tag{display:inline-block;font:600 11px var(--mono);letter-spacing:.05em;border:1px solid var(--line);padding:1px 6px;margin-right:6px;vertical-align:1px;white-space:nowrap}
+.tag.c1{border-color:var(--red);background:var(--red);color:#fff}
+
+/* Tableaux */
+.tbl{overflow-x:auto;margin:16px 0 10px;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+th{text-align:left;font:600 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--red);padding:9px 10px 9px 0}
+td{border-bottom:1px solid var(--line);padding:10px 10px 10px 0;vertical-align:top}
+tbody tr{transition:background .12s}
+tbody tr:hover{background:var(--red-soft)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hl td{font-weight:700;background:var(--red-soft)}
+tr.hl td:first-child{color:var(--red-ink);box-shadow:inset 3px 0 0 var(--red);padding-left:10px}
+
+/* Questionnaire */
+#plan{background:radial-gradient(70% 380px at 100% 0,rgba(227,38,28,.13),transparent 70%),var(--bg2);border-top:0}
+form.q{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 44px;margin-top:8px}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+legend{font-weight:700;font-size:15px;margin-bottom:10px;padding:0}
+legend small{font-weight:400;color:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg label{position:relative}
+.seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.seg span{display:block;border:1px solid var(--line);background:var(--card);padding:8px 13px;font-size:14px;cursor:pointer;user-select:none;transition:border-color .12s,background .12s,color .12s}
+.seg label:hover span{border-color:var(--red-line)}
+.seg input:checked+span{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 0 18px rgba(227,38,28,.3)}
+.seg input:focus-visible+span{outline:2px solid var(--red);outline-offset:2px}
+.step{display:flex;align-items:center;border:1px solid var(--line);background:var(--card);width:max-content}
+.step button{width:40px;height:38px;border:0;background:none;color:var(--ink);font-size:18px;cursor:pointer}
+.step button:hover{color:#fff;background:var(--red)}
+.step output{min-width:38px;text-align:center;font:800 20px var(--display)}
+.qwide{grid-column:1/-1}
+
+/* Résultats */
+.result{margin-top:56px;border-top:2px solid var(--red);padding-top:30px}
+.result-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.result-head h3{margin:0;font:800 34px/1 var(--display);text-transform:uppercase}
+.btn{border:1px solid var(--red);background:var(--red);color:#fff;font:600 13px var(--sans);padding:10px 16px;cursor:pointer;letter-spacing:.04em;text-transform:uppercase}
+.btn:hover{background:var(--red-hi);border-color:var(--red-hi)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--red);color:var(--red-ink);background:transparent}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:26px 0}
+.kpi{border:1px solid var(--line);border-top:3px solid var(--red);padding:16px;background:var(--card)}
+.kpi .lbl{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.kpi .val{font:800 40px/1.05 var(--display);margin:8px 0 4px;font-variant-numeric:tabular-nums}
+.kpi .val small{font-size:18px;font-weight:700;color:var(--red-ink)}
+.kpi .sub{font-size:13px;color:var(--muted);line-height:1.4}
+.alerts{display:grid;gap:10px;margin:8px 0 30px}
+.alerts div{border-left:3px solid var(--muted);padding:10px 16px;background:var(--card)}
+.alerts div.warn{border-left-color:var(--red);background:linear-gradient(90deg,var(--red-soft),var(--card) 70%)}
+.alerts b{display:block;font-size:14.5px}
+.alerts span{font-size:14.5px;color:var(--muted)}
+.pal{margin-top:18px}
+.pal h4{font:700 13px var(--mono);letter-spacing:.08em;text-transform:uppercase;margin:28px 0 6px;display:flex;gap:10px;align-items:baseline;color:var(--red-ink)}
+.pal h4 em{font-style:normal;color:var(--muted);font-weight:400;letter-spacing:0;text-transform:none;font-family:var(--sans)}
+.chk{list-style:none;padding:0;margin:0}
+.chk li{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.chk input{margin-top:5px;accent-color:var(--red);flex:none;width:16px;height:16px}
+.chk .t{flex:1}
+.chk li.done .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--red)}
+.chk .tag{margin-top:3px}
+
+/* Arbre de décision */
+.tree{border-left:2px solid var(--red);padding-left:22px;margin:16px 0}
+.tree .q{font-weight:700;margin:16px 0 6px}
+.tree .q:first-child{margin-top:0}
+.tree .a{margin:4px 0;padding-left:18px;position:relative;color:var(--muted)}
+.tree .a::before{content:"→";position:absolute;left:0;color:var(--red-ink)}
+
+/* Pied de page : toujours noir */
+footer{position:relative;background:var(--black);padding:60px 0 72px;font-size:14px;color:rgba(255,255,255,.55)}
+footer::before{content:"";position:absolute;top:0;left:0;right:0;height:12px;background:repeating-linear-gradient(-45deg,var(--red) 0 14px,#050505 14px 28px)}
+footer p{max-width:820px}
+footer strong{color:#fff!important}
+footer p+p{font:700 clamp(18px,2.4vw,24px)/1.3 var(--display);letter-spacing:.04em;text-transform:uppercase;color:#fff}
+
+/* Animations discrètes */
+@media (prefers-reduced-motion:no-preference){
+  .hero h1,.hero .lead,.hero .facts,.hero .eyebrow{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero .eyebrow{animation-delay:0s}.hero h1{animation-delay:.08s}.hero .lead{animation-delay:.2s}.hero .facts{animation-delay:.32s}
+  .brand::after,.eyebrow::before{animation:pulse 2.4s ease-in-out infinite}
+}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* Responsive */
+@media (max-width:860px){
+  .cols,.cols3{grid-template-columns:1fr;gap:22px}
+  form.q{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:560px){
+  .facts{grid-template-columns:1fr}
+  .facts div{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .facts div::before{display:none}
+  .kpi .val{font-size:30px}
+  .theme{display:none}
+  section{padding:56px 0}
+  .alert-bar{align-items:flex-start}
+}
+
+/* Impression : le plan seulement, en noir sur blanc */
+@media print{
+  :root,:root[data-theme]{--bg:#fff;--bg2:#fff;--card:#fff;--soft:#fff;--ink:#000;--muted:#444;--line:#ccc;--red:#b3131a;--red-ink:#b3131a;--red-soft:transparent}
+  header.top,.hero,.hazard,section:not(#plan),footer,form.q,.noprint,#plan .intro,#plan .kicker,#plan h2{display:none!important}
+  body{background:#fff;color:#000;font-size:11pt}
+  #plan{background:#fff;padding:0;border:0}
+  .result{margin-top:0;border-top:2px solid #000}
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  .kpi{box-shadow:none}
+  .chk li{break-inside:avoid}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#haut">SURVIVRE</a>
+    <nav class="menu" aria-label="Sommaire">
+      <a href="#plan">Mon plan</a>
+      <a href="#pourquoi">Pourquoi</a>
+      <a href="#premieres-heures">Premières heures</a>
+      <a href="#eau">Eau</a>
+      <a href="#alimentation">Alimentation</a>
+      <a href="#energie">Énergie</a>
+      <a href="#froid-chaleur">Froid et chaleur</a>
+      <a href="#sante">Santé et hygiène</a>
+      <a href="#information">S'informer</a>
+      <a href="#partir">Partir</a>
+      <a href="#paliers">Paliers</a>
+      <a href="#exemple">Exemple local</a>
+      <a href="#sources">Sources</a>
+    </nav>
+    <button class="theme noprint" id="themeBtn" type="button" aria-label="Changer de thème">Clair / sombre</button>
+  </div>
+</header>
+
+<main id="haut">
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Préparation civile · de 72 heures à 30 jours</p>
+    <h1>Survivre<span>.</span></h1>
+    <p class="lead">Se préparer, chez soi, à une crise longue : plusieurs jours, voire plusieurs semaines sans électricité, sans eau courante, sans réseau et sans commerces. Calmement, légalement, sans achats de panique.</p>
+    <div class="facts">
+      <div><b>72<i>h</i></b><span>le socle officiel de préparation en France et dans l'Union européenne</span></div>
+      <div><b>10<i>L</i></b><span>d'eau par personne et par jour pour vivre correctement, toilette comprise</span></div>
+      <div><b>30<i>jours</i></b><span>un objectif volontaire, au-delà de toutes les doctrines publiques</span></div>
+    </div>
+    <div class="alert-bar"><strong>Les consignes des autorités priment toujours.</strong> Un ordre d'évacuation l'emporte sur n'importe quel stock. Danger immédiat : <strong>112</strong> (pompiers 18, SAMU 15, police 17).</div>
+  </div>
+</div>
+<div class="hazard" aria-hidden="true"></div>
+
+<!-- ============ PLAN PERSONNALISÉ ============ -->
+<section id="plan">
+  <div class="wrap">
+    <p class="kicker">01 · Mon plan</p>
+    <h2>Votre plan, en deux minutes</h2>
+    <p class="intro">Répondez à quelques questions : les quantités et la liste d'actions se recalculent aussitôt. Vos réponses restent dans votre navigateur, rien n'est envoyé.</p>
+
+    <form class="q" id="q" autocomplete="off">
+      <fieldset class="qwide">
+        <legend>Combien de temps voulez-vous tenir sans aucun approvisionnement ?</legend>
+        <div class="seg">
+          <label><input type="radio" name="d" value="3"><span>72 heures</span></label>
+          <label><input type="radio" name="d" value="7"><span>7 jours</span></label>
+          <label><input type="radio" name="d" value="14" checked><span>14 jours</span></label>
+          <label><input type="radio" name="d" value="30"><span>30 jours</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Adultes dans le foyer</legend>
+        <div class="step" data-name="ad"><button type="button" data-d="-1" aria-label="Moins">−</button><output>1</output><button type="button" data-d="1" aria-label="Plus">+</button></div>
+      </fieldset>
+      <fieldset>
+        <legend>Enfants <small>(moins de 14 ans)</small></legend>
+        <div class="step" data-name="en"><button type="button" data-d="-1" aria-label="Moins">−</button><output>0</output><button type="button" data-d="1" aria-label="Plus">+</button></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Logement</legend>
+        <div class="seg">
+          <label><input type="radio" name="lg" value="haut" checked><span>Appartement, 3e étage ou plus</span></label>
+          <label><input type="radio" name="lg" value="bas"><span>Appartement, rez-de-chaussée à 2e</span></label>
+          <label><input type="radio" name="lg" value="maison"><span>Maison</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Cave, cellier ou garage pour stocker ?</legend>
+        <div class="seg">
+          <label><input type="radio" name="cave" value="non" checked><span>Non</span></label>
+          <label><input type="radio" name="cave" value="oui"><span>Oui</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Chauffage habituel</legend>
+        <div class="seg">
+          <label><input type="radio" name="ch" value="elec"><span>Électrique</span></label>
+          <label><input type="radio" name="ch" value="gaz"><span>Chaudière individuelle</span></label>
+          <label><input type="radio" name="ch" value="coll"><span>Collectif</span></label>
+          <label><input type="radio" name="ch" value="bois"><span>Poêle ou cheminée</span></label>
+          <label><input type="radio" name="ch" value="nsp" checked><span>Je ne sais pas</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Balcon, terrasse ou jardin bien ensoleillé ?</legend>
+        <div class="seg">
+          <label><input type="radio" name="sol" value="oui" checked><span>Oui</span></label>
+          <label><input type="radio" name="sol" value="non"><span>Non ou très ombragé</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Baignoire ?</legend>
+        <div class="seg">
+          <label><input type="radio" name="bain" value="oui"><span>Oui</span></label>
+          <label><input type="radio" name="bain" value="non" checked><span>Non, douche</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Véhicule</legend>
+        <div class="seg">
+          <label><input type="radio" name="vh" value="aucun"><span>Aucun</span></label>
+          <label><input type="radio" name="vh" value="therm" checked><span>Essence ou diesel</span></label>
+          <label><input type="radio" name="vh" value="elec"><span>Électrique</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Saison à préparer en priorité</legend>
+        <div class="seg">
+          <label><input type="radio" name="sa" value="hiver"><span>Hiver</span></label>
+          <label><input type="radio" name="sa" value="ete"><span>Été, canicule</span></label>
+          <label><input type="radio" name="sa" value="deux" checked><span>Les deux</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Niveau de confort visé</legend>
+        <div class="seg">
+          <label><input type="radio" name="nv" value="S"><span>Survie</span></label>
+          <label><input type="radio" name="nv" value="M" checked><span>Minimum acceptable</span></label>
+          <label><input type="radio" name="nv" value="A"><span>Amélioré</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset class="qwide">
+        <legend>Situations particulières <small>(plusieurs choix possibles)</small></legend>
+        <div class="seg">
+          <label><input type="checkbox" name="px" value="trait"><span>Traitement quotidien</span></label>
+          <label><input type="checkbox" name="px" value="appareil"><span>Appareil médical électrique</span></label>
+          <label><input type="checkbox" name="px" value="mobilite"><span>Mobilité réduite</span></label>
+          <label><input type="checkbox" name="px" value="animal"><span>Animal</span></label>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="result" id="result" aria-live="polite">
+      <div class="result-head">
+        <h3 id="rTitle">Votre plan</h3>
+        <div class="noprint" style="display:flex;gap:8px">
+          <button class="btn ghost" type="button" id="resetBtn">Effacer les cases</button>
+          <button class="btn" type="button" onclick="window.print()">Imprimer le plan</button>
+        </div>
+      </div>
+      <p class="muted" id="rSub" style="margin:6px 0 0"></p>
+      <div class="kpis" id="kpis"></div>
+      <h3 style="margin-top:8px">Ce qui compte chez vous</h3>
+      <div class="alerts" id="alerts"></div>
+      <h3>Votre liste, palier par palier</h3>
+      <p class="muted" style="margin:0">Cochez au fur et à mesure : les cases restent mémorisées dans ce navigateur. <span class="tag c1">C1</span> vital · <span class="tag">C2</span> essentiel · <span class="tag">C3</span> utile.</p>
+      <div class="pal" id="pal"></div>
+      <p class="muted" style="font-size:13.5px;margin-top:28px">Quantités calculées avec 10 % de marge (20 % pour le gaz), à partir des repères des sections suivantes. Ce sont des ordres de grandeur de planification, pas des prescriptions médicales : ajustez-les à votre âge, votre corpulence et votre activité.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ POURQUOI ============ -->
+<section id="pourquoi">
+  <div class="wrap">
+    <p class="kicker">02 · Pourquoi, et jusqu'où</p>
+    <h2>72 heures, c'est le début. Pas la fin.</h2>
+    <p class="intro">Les autorités demandent de tenir trois jours pour franchir le pic de désorganisation et laisser les secours aux plus vulnérables. Cela ne garantit pas qu'un service sera rétabli à la 72e heure : les coupures réellement observées vont de quelques heures à plus d'un mois.</p>
+
+    <div class="cols">
+      <div>
+        <h3>Ce que demandent les pays</h3>
+        <div class="tbl"><table style="min-width:0">
+          <thead><tr><th>Pays</th><th>Durée</th><th class="num">Eau / jour</th></tr></thead>
+          <tbody>
+            <tr class="hl"><td>France</td><td>72 h</td><td class="num">2 L</td></tr>
+            <tr><td>Union européenne</td><td>au moins 72 h</td><td class="num">n.d.</td></tr>
+            <tr><td>Finlande, Danemark, Belgique, Pays-Bas, Canada</td><td>72 h</td><td class="num">2 à 4 L</td></tr>
+            <tr><td>Japon</td><td>3 j, 1 semaine souhaitée</td><td class="num">3 L</td></tr>
+            <tr><td>Suède, Norvège, Suisse</td><td>environ 7 j</td><td class="num">3 L</td></tr>
+            <tr><td>Allemagne</td><td>10 j</td><td class="num">2 L</td></tr>
+            <tr><td>Autriche</td><td>10 à 14 j</td><td class="num">2,5 L</td></tr>
+          </tbody>
+        </table></div>
+        <p class="muted" style="font-size:14px">Ces écarts traduisent des choix de partage du risque entre l'État et les ménages, pas un désaccord scientifique.</p>
+      </div>
+      <div>
+        <h3>Ce qui s'est réellement passé</h3>
+        <div class="tbl"><table style="min-width:0">
+          <thead><tr><th>Événement</th><th>Durée de la coupure</th></tr></thead>
+          <tbody>
+            <tr><td>Blackout Espagne et Portugal, avril 2025</td><td>15 à 19 h</td></tr>
+            <tr><td>Tempête Ciarán, France, novembre 2023</td><td>1,2 million de foyers ; jours, parfois plus</td></tr>
+            <tr><td>Frappes sur l'énergie, Ukraine, 2024</td><td>coupures répétées, plus de 12 h par jour</td></tr>
+            <tr class="hl"><td>Verglas, Québec, 1998</td><td>jusqu'à un mois</td></tr>
+            <tr class="hl"><td>Cyclone Chido, Mayotte, 2024</td><td>plus de six semaines</td></tr>
+          </tbody>
+        </table></div>
+        <p class="muted" style="font-size:14px">Une panne « fonctionnelle » se répare vite ; une destruction physique (glace, cyclone, guerre) se compte en semaines.</p>
+      </div>
+    </div>
+
+    <h3>Trente jours, ce n'est pas dix fois 72 heures</h3>
+    <div class="cols3">
+      <div><strong>L'eau devient un problème de masse.</strong> 300 L, c'est 300 kg à loger, répartir et parfois monter à pied.</div>
+      <div><strong>Les déchets s'accumulent.</strong> Sans chasse d'eau, toilettes et ordures deviennent un sous-système sanitaire à part entière.</div>
+      <div><strong>L'énergie doit être produite.</strong> Le stockage seul devient lourd et cher ; une petite production solaire change tout.</div>
+      <div><strong>La nourriture doit nourrir.</strong> Une ration monotone tient trois jours, pas un mois : fibres, protéines, plaisir.</div>
+      <div><strong>Le froid et la chaleur dominent.</strong> Et avec eux la tentation de solutions dangereuses : monoxyde de carbone, incendie.</div>
+      <div><strong>Le moral compte.</strong> Isolement, rumeurs, sommeil : la routine et les voisins deviennent des ressources.</div>
+    </div>
+    <div class="note">Se préparer progressivement, en temps normal, est exactement ce que recommandent les autorités. Acheter massivement au début d'une crise désorganise les commerces et pénalise tout le monde.</div>
+  </div>
+</section>
+
+<!-- ============ PREMIÈRES HEURES ============ -->
+<section id="premieres-heures">
+  <div class="wrap">
+    <p class="kicker">03 · Les premières heures</p>
+    <h2>Ce qui tombe, et dans quel ordre</h2>
+    <p class="intro">Il n'existe pas de chronomètre universel : tout dépend de votre immeuble et des réseaux locaux. Voici l'enveloppe à garder en tête après une coupure générale d'électricité.</p>
+    <div class="tbl"><table>
+      <thead><tr><th style="width:140px">Après</th><th>Ce qui peut se produire</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">0 à 1 min</td><td>Ascenseurs bloqués, éclairage, plaques, box Internet et chauffage électrique coupés, interphones et portes motorisées perturbés.</td></tr>
+        <tr><td class="mono">0 à 15 min</td><td>Paiement par carte impossible dans beaucoup de commerces, Wi-Fi perdu, chauffage collectif à l'arrêt si ses pompes ne sont pas secourues.</td></tr>
+        <tr class="hl"><td class="mono">immédiat à quelques heures</td><td>En étage, l'eau peut s'arrêter tout de suite si l'immeuble dépend d'un surpresseur électrique.</td></tr>
+        <tr><td class="mono">quelques heures</td><td>Une partie des antennes mobiles s'éteint quand leurs batteries sont vides ; le réseau restant sature.</td></tr>
+        <tr><td class="mono">6 à 24 h</td><td>Stations-service, chaîne du froid, distribution et postes de relevage des eaux usées en difficulté.</td></tr>
+        <tr><td class="mono">1 à 7 jours</td><td>Stocks locaux, déchets, sanitaires, température et santé deviennent les contraintes principales.</td></tr>
+        <tr><td class="mono">au-delà</td><td>Une opération logistique et sanitaire de longue durée : rester chez soi dépend de l'eau, de l'hygiène, de la température et de la sécurité du bâtiment.</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="cols" style="margin-top:32px">
+      <div>
+        <h3>J0, sans préavis</h3>
+        <ol class="steps">
+          <li>Vérifier qu'il n'y a ni fumée, ni odeur de gaz, ni danger dans l'escalier.</li>
+          <li>Remplir tout récipient propre si l'eau coule encore et qu'aucun avis de non-potabilité n'existe.</li>
+          <li>Garder réfrigérateur et congélateur fermés ; manger d'abord le frais.</li>
+          <li>Ne plus tirer la chasse tant que le fonctionnement des égouts n'est pas confirmé.</li>
+          <li>Téléphone en économie d'énergie, SMS plutôt qu'appels ; radio FM aux heures fixées.</li>
+          <li>Débrancher les appareils sensibles ; contacter son voisin de contrôle.</li>
+          <li>Ne pas appeler les secours pour s'informer : la ligne doit rester libre.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Avec 24 à 48 heures de préavis</h3>
+        <ol class="steps">
+          <li>Charger téléphones, batteries, lampes et le véhicule, en gardant le plan d'évacuation.</li>
+          <li>Remplir tous les contenants d'eau, et la baignoire (eau d'usage, pas eau de boisson).</li>
+          <li>Faire une lessive, prendre une douche, vider les poubelles.</li>
+          <li>Télécharger les cartes, imprimer les informations critiques.</li>
+          <li>Rentrer les objets du balcon qui pourraient s'envoler.</li>
+          <li>Retirer une petite somme en espèces, sans ruée.</li>
+          <li>Préparer le sac d'évacuation près de la porte ; prévenir voisins et proches.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EAU ============ -->
+<section id="eau">
+  <div class="wrap">
+    <p class="kicker">04 · Eau</p>
+    <h2>L'eau est le verrou, pas la nourriture</h2>
+    <p class="intro">Un mois de nourriture pèse environ 30 kg. Un mois d'eau, même économe, pèse dix fois plus. C'est la contrainte qui dimensionne tout le reste.</p>
+    <h3>Budget quotidien par personne</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Usage</th><th class="num">Survie</th><th class="num">Minimum acceptable</th><th class="num">Amélioré</th></tr></thead>
+      <tbody>
+        <tr><td>Boisson (hiver ; canicule)</td><td class="num">2 ; 3,5 L</td><td class="num">2,5 ; 4 L</td><td class="num">2,5 ; 4 L</td></tr>
+        <tr><td>Préparation des repas</td><td class="num">0,5 L</td><td class="num">1 L</td><td class="num">1,5 L</td></tr>
+        <tr><td>Hygiène corporelle</td><td class="num">1,5 L</td><td class="num">3 L</td><td class="num">5 L</td></tr>
+        <tr><td>Vaisselle</td><td class="num">0,5 L</td><td class="num">1 L</td><td class="num">2 L</td></tr>
+        <tr><td>Sanitaires (réserve, chasse si égout confirmé)</td><td class="num">2 L</td><td class="num">2,5 L</td><td class="num">4 L</td></tr>
+        <tr class="hl"><td>Total hiver ; canicule</td><td class="num">6,5 ; 8 L</td><td class="num">10 ; 11,5 L</td><td class="num">15 ; 16,5 L</td></tr>
+        <tr><td>Stock pour 30 jours, marge comprise</td><td class="num">215 L</td><td class="num">330 L</td><td class="num">495 L</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted" style="font-size:14px">Le standard humanitaire Sphere retient 15 L par jour. Le niveau « minimum acceptable » à 10 L suppose des toilettes sans eau et une vraie discipline.</p>
+
+    <div class="cols">
+      <div>
+        <h3>Stocker sans se mettre en danger</h3>
+        <ul class="clean">
+          <li class="c1">Bouteilles du commerce en majorité : c'est l'eau la plus sûre et la moins chère.</li>
+          <li>Quelques bidons alimentaires de 10 L pour porter et remplir ; pas de fûts de 100 à 200 L, impossibles à déplacer.</li>
+          <li class="c1">Au sol, réparti sur plusieurs zones, à l'abri de la lumière et de la chaleur. Plusieurs centaines de kilos : faites vérifier la charge admissible avant de tout regrouper.</li>
+          <li>Jamais sur un balcon : gel, chaleur, ultraviolets.</li>
+          <li>Eau du robinet mise en bidon : dater et renouveler tous les six mois.</li>
+          <li>Avec préavis, une poche alimentaire de baignoire apporte 120 à 180 L d'eau d'usage.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Rendre une eau buvable</h3>
+        <div class="tbl"><table style="min-width:0">
+          <thead><tr><th>Méthode</th><th>Bactéries</th><th>Virus</th><th>Parasites</th></tr></thead>
+          <tbody>
+            <tr><td>Ébullition franche</td><td>oui</td><td>oui</td><td>oui</td></tr>
+            <tr><td>Comprimés NaDCC (1 par litre)</td><td>30 min</td><td>30 min</td><td>2 h</td></tr>
+            <tr><td>Filtre 0,1 µm</td><td>oui</td><td class="red">non</td><td>oui</td></tr>
+            <tr><td>Ions d'argent seuls</td><td colspan="3">conservation, pas désinfection</td></tr>
+          </tbody>
+        </table></div>
+        <p style="font-size:15px">Une eau d'origine incertaine passe par <strong>deux barrières</strong> : filtre puis désinfection. Aucune méthode domestique ne rend potable une eau polluée par des produits chimiques ou des carburants. La pluie du balcon reste un appoint, toujours traitée.</p>
+      </div>
+    </div>
+    <div class="note"><strong>Au retour de l'eau courante</strong>, elle n'est pas forcément potable : attendez la confirmation du distributeur, de la mairie ou de l'ARS, et suivez les consignes de purge ou d'ébullition.</div>
+  </div>
+</section>
+
+<!-- ============ ALIMENTATION ============ -->
+<section id="alimentation">
+  <div class="wrap">
+    <p class="kicker">05 · Alimentation</p>
+    <h2>Un stock qui tourne, des repas sans cuisson</h2>
+    <p class="intro">Le meilleur stock n'est pas une ration de survie : ce sont des produits ordinaires, à date longue, que vous mangez déjà et que vous renouvelez au fil des courses. Premier entré, premier sorti.</p>
+    <div class="cols">
+      <div>
+        <h3>Repères nutritionnels</h3>
+        <ul class="clean">
+          <li><strong>Énergie</strong> : environ 2 200 kcal par jour pour un adulte, entre 1 800 et 2 600 selon l'âge, le sexe, la taille et l'activité.</li>
+          <li><strong>Protéines</strong> : 0,83 g par kilo de poids et par jour (58 g pour 70 kg).</li>
+          <li><strong>Fibres</strong> : 25 à 30 g par jour, contre la constipation des rations monotones.</li>
+          <li><strong>Sel</strong> : attention aux conserves et biscuits, lisez les étiquettes.</li>
+          <li>Pour 30 jours : environ 72 600 kcal avec marge, soit <strong>30 kg et 50 L de rangement</strong>.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Le panier type, pour un adulte et 30 jours</h3>
+        <div class="tbl"><table style="min-width:0">
+          <tbody>
+            <tr><td>Flocons d'avoine</td><td class="num">2 kg</td></tr>
+            <tr><td>Couscous, semoule, purée instantanée</td><td class="num">3,6 kg</td></tr>
+            <tr><td>Crackers et biscuits secs</td><td class="num">2,4 kg</td></tr>
+            <tr><td>Légumineuses en conserve</td><td class="num">4,8 kg</td></tr>
+            <tr><td>Poissons et autres protéines en conserve</td><td class="num">2,6 kg</td></tr>
+            <tr><td>Légumes, tomates, compotes en conserve</td><td class="num">7,8 kg</td></tr>
+            <tr><td>Lait en poudre, oléagineux, fruits secs</td><td class="num">3 kg</td></tr>
+            <tr><td>Huile, chocolat, sucre ou miel</td><td class="num">3 kg</td></tr>
+            <tr><td>Sel, café ou thé, épices</td><td class="num">0,7 kg</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    <h3>Économiser l'eau et le gaz</h3>
+    <p>Préférez ce qui se mange froid ou se réhydrate hors du feu (semoule, purée, avoine) : un menu bien construit demande environ 0,5 L d'eau bouillie et moins de trois minutes de flamme par jour. Le riz complet et les légumineuses sèches consomment beaucoup d'eau et de combustible. Une boîte ouverte se finit au même repas : sans froid, pas de restes.</p>
+    <div class="cols">
+      <div class="note" style="margin:0"><strong>DDM ou DLC ?</strong> La date de durabilité minimale (« de préférence avant ») peut être dépassée si l'emballage est intact. La date limite de consommation (« jusqu'au ») est impérative. Toute conserve bombée, rouillée ou qui fuit se jette sans y goûter.</div>
+      <div class="box"><strong>Quand le courant s'arrête :</strong> réfrigérateur fermé, environ 4 h ; congélateur plein, environ 48 h ; à moitié plein, environ 24 h. Ensuite, on trie selon la température, jamais au goût.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÉNERGIE ============ -->
+<section id="energie">
+  <div class="wrap">
+    <p class="kicker">06 · Énergie</p>
+    <h2>Peu de watts, bien choisis</h2>
+    <p class="intro">On n'alimente pas un radiateur avec une batterie. On réserve l'électricité à la lumière, à l'information, au téléphone et à de petits appareils, et on la produit avec le soleil quand c'est possible.</p>
+    <h3>Ce qu'il faut vraiment, pour une personne</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Usage</th><th class="num">Survie</th><th class="num">Minimum hiver</th><th class="num">Minimum été</th></tr></thead>
+      <tbody>
+        <tr><td>Éclairage LED</td><td class="num">6 Wh</td><td class="num">15 Wh</td><td class="num">15 Wh</td></tr>
+        <tr><td>Téléphone</td><td class="num">12 Wh</td><td class="num">15 Wh</td><td class="num">15 Wh</td></tr>
+        <tr><td>Radio</td><td class="num">2 Wh</td><td class="num">6 Wh</td><td class="num">6 Wh</td></tr>
+        <tr><td>Lampe frontale, piles, pertes</td><td class="num">2 Wh</td><td class="num">7 Wh</td><td class="num">7 Wh</td></tr>
+        <tr><td>Coussin chauffant 10 W, 2 h</td><td class="num">0</td><td class="num">20 Wh</td><td class="num">0</td></tr>
+        <tr><td>Ventilateur USB 5 W, 6 h</td><td class="num">0</td><td class="num">0</td><td class="num">30 Wh</td></tr>
+        <tr class="hl"><td>Total par jour</td><td class="num">22 Wh</td><td class="num">63 Wh</td><td class="num">73 Wh</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted" style="font-size:14px">Pour comparer : une bouilloire électrique consomme environ 130 Wh de batterie par litre. Deux litres par jour pendant un mois représentent près de 8 kWh, hors de portée d'un petit système.</p>
+
+    <div class="cols">
+      <div>
+        <h3>Batterie et soleil</h3>
+        <ul class="clean">
+          <li>Pour 14 à 30 jours, une <strong>station au lithium fer phosphate (LFP) d'environ 1 kWh</strong> et <strong>200 à 300 Wc de panneaux</strong> forment le meilleur compromis.</li>
+          <li class="c1">Les kits solaires branchés sur une prise de la maison <strong>s'arrêtent pendant une coupure</strong>. En secours, les panneaux se branchent directement sur la station, sans jamais toucher au réseau du logement.</li>
+          <li>En décembre, comptez de l'ordre de 150 Wh par jour pour 100 Wc posés à la verticale plein sud ; trois fois plus en été avec une inclinaison. Calculez pour votre adresse avec l'outil européen PVGIS.</li>
+          <li>Prévoyez au moins 4 à 7 jours de réserve sans soleil. Ne chargez pas une batterie en dessous de 0 °C.</li>
+          <li>Utilisez l'USB-C et le 12 V d'abord : l'onduleur 230 V perd environ 15 % de l'énergie.</li>
+          <li>Piles lithium AA pour la longue durée et le froid ; piles NiMH rechargeables pour l'usage courant.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Cuisiner sans risque</h3>
+        <ul class="clean">
+          <li>Un réchaud à cartouches de butane, utilisé <strong>strictement selon sa notice</strong>, fenêtre entrouverte, jamais sans surveillance.</li>
+          <li>Repère : environ 14 g de gaz par litre d'eau portée à ébullition. Pour une personne et 30 jours, 1,4 à 1,8 kg de gaz, plus 0,7 kg si vous chauffez deux bouillottes par jour.</li>
+          <li class="c1">Un <strong>détecteur de monoxyde de carbone</strong> (norme EN 50291) dès qu'une flamme entre dans le logement.</li>
+          <li>Bouteilles de propane de plus de 3 kg : à l'extérieur uniquement. Vérifiez aussi votre règlement de copropriété et votre assurance.</li>
+          <li class="c1">Jamais de barbecue, brasero, groupe électrogène ni chauffage d'appoint à combustion à l'intérieur ou sur un balcon.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Trois configurations pour 30 jours</h3>
+    <div class="tbl"><table>
+      <thead><tr><th></th><th>Économique</th><th>Équilibrée</th><th>Robuste</th></tr></thead>
+      <tbody>
+        <tr><td>Batterie LFP</td><td>500 à 700 Wh</td><td>1 000 à 1 200 Wh</td><td>2 000 à 2 400 Wh</td></tr>
+        <tr><td>Panneaux</td><td>100 à 200 Wc</td><td>200 à 300 Wc</td><td>300 à 400 Wc</td></tr>
+        <tr><td>Jours sans soleil</td><td>7 à 12</td><td>12 à 17</td><td>17 à 25</td></tr>
+        <tr><td>Masse</td><td>10 à 18 kg</td><td>20 à 30 kg</td><td>35 à 50 kg</td></tr>
+        <tr class="hl"><td>Budget indicatif</td><td>500 à 900 €</td><td>900 à 1 500 €</td><td>1 600 à 2 800 €</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><strong>Un véhicule électrique</strong> est d'abord votre moyen d'évacuation. Gardez une réserve de charge suffisante pour rejoindre deux destinations hors de la zone, et une carte-clé physique. Ses ports USB et sa prise basse tension peuvent dépanner, avec les accessoires du constructeur uniquement.</div>
+  </div>
+</section>
+
+<!-- ============ FROID ET CHALEUR ============ -->
+<section id="froid-chaleur">
+  <div class="wrap">
+    <p class="kicker">07 · Froid et chaleur</p>
+    <h2>Chauffer la personne, pas l'air</h2>
+    <p class="intro">Sans chauffage, un logement d'immeuble descend souvent entre 8 et 15 °C après plusieurs jours de froid, selon son isolation, son étage et ses voisins. C'est le risque dominant de l'hiver.</p>
+    <div class="cols">
+      <div>
+        <h3>Seuils à surveiller</h3>
+        <div class="tbl"><table style="min-width:0">
+          <tbody>
+            <tr><td class="mono">18 °C et plus</td><td>Référence santé de l'OMS pour la population générale.</td></tr>
+            <tr><td class="mono">15 à 18 °C</td><td>Vigilance : vêtements secs, couches, volume de vie réduit.</td></tr>
+            <tr><td class="mono">10 à 15 °C</td><td>Situation dégradée, difficile à tenir plusieurs semaines.</td></tr>
+            <tr class="hl"><td class="mono">sous 10 °C</td><td>Chercher en priorité un lieu chauffé.</td></tr>
+            <tr class="hl"><td class="mono">symptômes</td><td>Frissons intenses, maladresse, confusion, somnolence : urgence, quelle que soit la température de la pièce. Appelez le 15.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <h3>En hiver</h3>
+        <ol class="steps">
+          <li>Choisir une pièce refuge, petite et intérieure ; fermer les pièces inutiles.</li>
+          <li>Volets et rideaux fermés la nuit, ouverts au soleil le jour.</li>
+          <li>Isoler du sol : tapis de sol sous le couchage.</li>
+          <li>Sac de couchage choisi sur sa température de confort, bonnet, couches sèches.</li>
+          <li>Bouillotte, coussin chauffant basse tension de 10 à 20 W.</li>
+          <li class="c1">Ne jamais boucher les entrées d'air ; aérer en grand 5 à 10 minutes par jour.</li>
+        </ol>
+      </div>
+    </div>
+    <h3>En canicule</h3>
+    <p>Fermer volets et fenêtres le jour, aérer la nuit quand l'air extérieur est plus frais, se mouiller la peau, boire régulièrement (3,5 à 4 L par jour), réduire les efforts. Un ventilateur USB de 5 W tourne une journée avec 40 Wh. Malaise, propos incohérents, fièvre : appelez le 15. Un balcon plein sud devient une source de chaleur : protégez-le du soleil si vous le pouvez.</p>
+  </div>
+</section>
+
+<!-- ============ SANTÉ ============ -->
+<section id="sante">
+  <div class="wrap">
+    <p class="kicker">08 · Santé et hygiène</p>
+    <h2>Ne pas créer une seconde catastrophe chez soi</h2>
+    <p class="intro">Les deux premiers risques sanitaires d'une crise domestique sont les chutes et le monoxyde de carbone (environ 3 000 intoxications et une centaine de décès par an en France). Une formation aux premiers secours (PSC, environ 7 heures) vaut plus que n'importe quel gadget.</p>
+
+    <div class="cols">
+      <div>
+        <h3>Toilettes sans eau</h3>
+        <p style="font-size:15.5px">Une coupure d'eau ne signifie pas une panne d'égout, et inversement. Tant que le fonctionnement de l'assainissement n'est pas confirmé, <strong>ne tirez plus la chasse</strong> : un collecteur saturé reflue chez les voisins des étages bas.</p>
+        <ul class="clean">
+          <li>Repère japonais : 5 passages par personne et par jour, soit 165 sacs pour un mois avec marge.</li>
+          <li>Système le plus robuste : cuvette ou seau, sac résistant, absorbant ou gélifiant, second sac, bac rigide fermé.</li>
+          <li>Les toilettes chimiques imposent une vidange ; l'urine séparée crée des dizaines de litres à évacuer.</li>
+          <li>Un mois de sacs représente 40 à 60 kg : prévoyez dès maintenant où les stocker, fermés, à l'ombre, hors des parties communes. Ne jamais brûler.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Hygiène avec peu d'eau, environ 5 L par jour</h3>
+        <ul class="clean">
+          <li>Mains au savon après les toilettes et avant de cuisiner ou manger ; gel hydroalcoolique (60 % d'alcool au moins) quand les mains sont propres.</li>
+          <li>Toilette quotidienne au gant des zones à risque, pieds lavés et séchés.</li>
+          <li>Vaisselle simple, raclée, deux bacs lavage et rinçage.</li>
+          <li>Trois flux de déchets fermés : recyclables secs, ordures, sanitaires.</li>
+          <li>Lentilles : passez aux lunettes, jamais d'eau du robinet sur les lentilles.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Trousse et pharmacie pour un mois</h3>
+    <p>Gants nitrile (20 paires), compresses stériles (40), pansements variés (30 à 40), sérum physiologique en unidoses (30), antiseptique (20 doses), bandes, sparadrap, pansements pour brûlure, couvertures de survie, ciseaux, pince à échardes, thermomètre. Médicaments courants (douleur et fièvre, sels de réhydratation, diarrhée, allergie) <strong>choisis avec un pharmacien</strong> selon votre profil. Les médicaments périmés ne sont pas une réserve fiable : faites-les tourner. Ni balcon ni voiture au soleil pour la pharmacie.</p>
+
+    <h3>Quand chercher de l'aide malgré tout</h3>
+    <div class="box">
+      <ul class="clean" style="columns:2;column-gap:40px">
+        <li class="c1">Perte de connaissance, confusion, convulsion</li>
+        <li class="c1">Difficulté à respirer, douleur dans la poitrine</li>
+        <li class="c1">Hémorragie qui ne s'arrête pas</li>
+        <li class="c1">Brûlure profonde, étendue, électrique ou chimique</li>
+        <li class="c1">Suspicion de monoxyde de carbone</li>
+        <li class="c1">Hypothermie ou coup de chaleur</li>
+        <li class="c1">Diarrhée avec impossibilité de boire, très peu d'urines</li>
+        <li class="c1">Infection dentaire avec fièvre et gonflement du visage</li>
+      </ul>
+    </div>
+    <p class="muted" style="font-size:14px">Seul, faites le point matin et soir (température, boisson, urines, plaies) et convenez d'un contrôle quotidien avec un voisin. Si votre jugement se trouble, passez immédiatement en mode « secours ».</p>
+  </div>
+</section>
+
+<!-- ============ INFORMATION ============ -->
+<section id="information">
+  <div class="wrap">
+    <p class="kicker">09 · S'informer, communiquer</p>
+    <h2>Plusieurs canaux, aucun point unique de panne</h2>
+    <p class="intro">FR-Alert arrive sur votre téléphone sans application, mais il a besoin du réseau mobile. Les sirènes et la radio FM, elles, ne dépendent pas de votre téléphone. La radio à piles reste le dernier canal vraiment autonome.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Canal</th><th>Sans Internet</th><th>Sans réseau mobile</th><th>Sans courant chez vous</th><th>Rôle</th></tr></thead>
+      <tbody>
+        <tr><td>FR-Alert</td><td>oui</td><td class="red">non</td><td>si téléphone chargé</td><td>alerte immédiate</td></tr>
+        <tr><td>Sirènes</td><td>oui</td><td>oui</td><td>oui</td><td>alerte initiale</td></tr>
+        <tr class="hl"><td>Radio FM à piles</td><td>oui</td><td>oui</td><td>oui</td><td>information durable</td></tr>
+        <tr><td>Radio DAB+</td><td>oui</td><td>oui</td><td>avec batterie</td><td>complément seulement</td></tr>
+        <tr><td>Voisins, mairie</td><td>oui</td><td>oui</td><td>oui</td><td>relais local</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted" style="font-size:14px">Signal national d'alerte : trois sons montants et descendants de 1 min 41 s, séparés de 5 secondes. Fin d'alerte : son continu de 30 secondes. Essai le premier mercredi du mois à midi, une seule séquence.</p>
+
+    <div class="cols">
+      <div>
+        <h3>Communiquer</h3>
+        <ul class="clean">
+          <li>D'abord un plan humain : un relais hors zone, un voisin, deux heures de contact fixes (par exemple 9 h et 19 h).</li>
+          <li>Des messages courts : qui, où, état, prochaine action.</li>
+          <li>Talkies-walkies PMR446 : utiles seulement si un voisin ou un proche en a un aussi.</li>
+          <li>SOS par satellite : disponible en France sur certains smartphones récents. Vérifiez le vôtre avant d'y compter.</li>
+          <li>Messagerie satellite dédiée : pertinente si vous devez circuler hors couverture.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Papiers, argent, domicile</h3>
+        <ul class="clean">
+          <li>Documents sous trois formes : originaux, copies papier dans une pochette étanche, archive chiffrée hors ligne.</li>
+          <li>Espèces en petites coupures, environ 250 € pour un adulte, en deux cachettes. Pas pour vivre un mois : pour les premiers jours et une évacuation.</li>
+          <li>Porte verrouillée, stock invisible depuis le palier, lumière et bruit discrets. Aucune confrontation : on se met à l'abri et on alerte.</li>
+          <li>Carte papier de la région, cartes téléchargées hors ligne.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Tenir moralement</h3>
+    <p>Des horaires stables, deux fenêtres radio de 20 minutes par jour plutôt qu'une écoute continue, une activité physique douce, des tâches utiles, un journal, des livres et des jeux sans écran. Le 3114 (prévention du suicide) répond jour et nuit, tant que le téléphone fonctionne.</p>
+  </div>
+</section>
+
+<!-- ============ PARTIR ============ -->
+<section id="partir">
+  <div class="wrap">
+    <p class="kicker">10 · Rester ou partir</p>
+    <h2>Le stock ne doit jamais vous retenir</h2>
+    <p class="intro">Trente jours de réserves ne valent rien face à un incendie dans l'immeuble, une crue ou un ordre d'évacuation. Décidez de vos critères maintenant, à froid.</p>
+    <div class="cols">
+      <div class="tree">
+        <div class="q">Danger immédiat dans le bâtiment ? Feu, fumée dans l'escalier, gaz, fissures graves.</div>
+        <div class="a">Évacuer, appeler le 112 ou le 18.</div>
+        <div class="q">Consigne officielle (FR-Alert, sirène, mairie, secours) ?</div>
+        <div class="a">Évacuation : partir tout de suite, par l'itinéraire indiqué.</div>
+        <div class="a">Mise à l'abri : rester, fermer, écouter la radio.</div>
+        <div class="q">Crue ?</div>
+        <div class="a">Eau sur les routes : rester en hauteur, ne jamais traverser.</div>
+        <div class="q">Feu de forêt, fumées ?</div>
+        <div class="a">Partir tôt sur ordre ou si le feu approche.</div>
+        <div class="q">Accident industriel ou nucléaire ?</div>
+        <div class="a">Suivre strictement la consigne ; pas d'iode sans ordre des autorités.</div>
+        <div class="q">Simple coupure prolongée ?</div>
+        <div class="a">Bâtiment sûr, eau, température tenable, santé stable : rester.</div>
+        <div class="a">Moins de 24 h d'eau potable sans distribution, sanitaires ingérables, froid ou chaleur dangereux, santé qui se dégrade : partir de façon planifiée, tant que c'est sûr.</div>
+      </div>
+      <div>
+        <h3>Le sac d'évacuation</h3>
+        <p style="font-size:15.5px">Un kit de 72 heures distinct du stock, près de la porte, de 9 à 12 kg une fois rempli. Testez la descente de l'escalier avec.</p>
+        <ul class="clean">
+          <li>Copies des documents, espèces, doubles des clés, carte-clé du véhicule</li>
+          <li>Radio, lampe frontale, téléphone, câble et batterie externe</li>
+          <li>2 L d'eau, nourriture compacte pour 72 h prise dans le stock tournant</li>
+          <li>Vêtements chauds et de pluie, trousse et médicaments</li>
+          <li>Carte papier, carnet, stylo, liste des contacts</li>
+        </ul>
+        <h3>Avant de fermer la porte</h3>
+        <p style="font-size:15.5px">Fenêtres fermées, appareils inutiles débranchés, robinet d'eau fermé si pertinent, message à votre relais avec votre destination. Rien sur la porte qui signale un logement vide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PALIERS ============ -->
+<section id="paliers">
+  <div class="wrap">
+    <p class="kicker">11 · Paliers et budget</p>
+    <h2>Construire par étapes, dans l'ordre du risque</h2>
+    <p class="intro">Le meilleur rendement se situe dans les premiers paliers. Commencez par ce qui ne coûte rien, puis montez par étapes, sans jamais acheter deux fois.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Palier</th><th>Ce qu'on ajoute</th><th class="num">Budget cumulé*</th></tr></thead>
+      <tbody>
+        <tr><td class="mono red">N0 · sans achat</td><td>Organisation, alertes, fréquences, voisins, robinets d'arrêt, critères de départ, formation, inventaire de ce que vous avez déjà.</td><td class="num">0 €</td></tr>
+        <tr><td class="mono">N1 · 72 heures</td><td>Eau et nourriture pour 3 jours, radio FM à piles, lampe frontale, savon, trousse, copies de documents.</td><td class="num">110 à 170 €</td></tr>
+        <tr><td class="mono">N2 · 7 jours</td><td>Eau et nourriture pour 7 jours, réchaud et cartouches, détecteur de CO, comprimés et filtre, couchage chaud, toilettes de secours, bidons.</td><td class="num">300 à 470 €</td></tr>
+        <tr><td class="mono">N3 · 14 jours</td><td>Eau et nourriture pour 14 jours, station électrique d'environ 1 kWh, idéalement avec panneaux, trousse et hygiène renforcées.</td><td class="num">1 100 à 1 420 €</td></tr>
+        <tr><td class="mono">N4 · 30 jours</td><td>Eau et nourriture pour 30 jours, tout le combustible, tous les consommables sanitaires et médicaux, rotation organisée.</td><td class="num">1 450 à 1 850 €</td></tr>
+      </tbody>
+    </table></div>
+    <p class="muted" style="font-size:13.5px">* Ordres de grandeur pour un adulte, niveau « minimum acceptable », prix relevés en France en novembre 2026, hors espèces. L'énergie représente à elle seule environ la moitié du budget ; l'eau ne coûte qu'une soixantaine d'euros mais pèse 330 kg.</p>
+
+    <div class="cols">
+      <div>
+        <h3>Entretenir</h3>
+        <ul class="clean">
+          <li><strong>Chaque mois</strong> : radio, lampe, carte-clé, inventaire rapide.</li>
+          <li><strong>Chaque trimestre</strong> : rotation des aliments et de l'eau maison, test de la station, documents hors ligne.</li>
+          <li><strong>Chaque semestre</strong> : dates des médicaments, descente avec le sac, évacuation chronométrée.</li>
+          <li><strong>Chaque année</strong> : un week-end de 24 à 48 h « sans réseaux », sans jamais se priver d'eau ni de soins.</li>
+        </ul>
+      </div>
+      <div id="a-eviter">
+        <h3>À ne pas acheter</h3>
+        <ul class="clean">
+          <li class="c1">Groupe électrogène, barbecue ou chauffage à combustion pour l'intérieur ou le balcon</li>
+          <li>Kit solaire « prêt à brancher » sur prise présenté comme secours</li>
+          <li>Radiateur électrique pour une petite batterie</li>
+          <li>Fûts d'eau de 100 à 200 L en étage</li>
+          <li>Radio uniquement DAB+, ou radio américaine « NOAA »</li>
+          <li>Talkies-walkies sans personne à l'autre bout</li>
+          <li>Filtre vendu comme protection universelle contre les virus</li>
+          <li>Rations « survivalistes » coûteuses à la place d'aliments ordinaires</li>
+          <li class="c1">Batteries lithium ou détecteurs d'occasion, ou de provenance douteuse</li>
+          <li>Comprimés d'iode pris sans consigne officielle</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXEMPLE LOCAL ============ -->
+<section id="exemple">
+  <div class="wrap">
+    <p class="kicker">12 · Exemple local</p>
+    <h2>Un cas concret : un appartement à Fontainebleau</h2>
+    <p class="intro">Ce site est né d'une préparation à Fontainebleau (Seine-et-Marne). Les principes valent partout ; voici comment ils se traduisent localement. Faites le même exercice pour votre commune.</p>
+    <div class="cols">
+      <div>
+        <h3>Les risques qui comptent ici</h3>
+        <ul class="clean">
+          <li class="c1"><strong>Feu de forêt</strong> : le massif est classé sensible et les incendies de l'été 2026 l'ont rendu très concret. C'est le scénario qui impose de pouvoir partir.</li>
+          <li><strong>Tempête et chutes d'arbres</strong> : coupures électriques et routes bloquées, surtout en automne et en hiver.</li>
+          <li><strong>Crue de la Seine et du Loing</strong> : à vérifier adresse par adresse sur Géorisques.</li>
+          <li><strong>Vague de froid, canicule</strong> : pour un logement sans chauffage de secours.</li>
+          <li><strong>Nucléaire</strong> : la commune est hors du périmètre de 20 km de la centrale de Nogent-sur-Seine, à environ 60 km. Pas d'iode sans consigne.</li>
+          <li>Le scénario de dimensionnement retenu : une crise hivernale qui touche tous les réseaux à la fois, sans préavis.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Repères locaux à noter sur papier</h3>
+        <div class="tbl"><table style="min-width:0">
+          <thead><tr><th>Radio FM</th><th class="num">MHz</th></tr></thead>
+          <tbody>
+            <tr><td>ICI Paris Île-de-France (informations locales)</td><td class="num">91,9</td></tr>
+            <tr><td>France Inter</td><td class="num">94,2</td></tr>
+            <tr><td>France Culture</td><td class="num">97,9</td></tr>
+            <tr><td>France Musique</td><td class="num">103,3</td></tr>
+            <tr class="hl"><td>franceinfo</td><td class="num">105,5</td></tr>
+          </tbody>
+        </table></div>
+        <p class="muted" style="font-size:14px">Fréquences relevées en novembre 2026, à tester dans chaque pièce : la réception intérieure n'est jamais garantie. Un seul multiplex DAB+ local, sans les stations de Radio France.</p>
+        <ul class="clean">
+          <li>Informations sur les risques : préfecture de Seine-et-Marne, dossier départemental des risques majeurs (DDRM).</li>
+          <li>Accueil des sinistrés : centre désigné par la mairie au moment de l'événement, ne pas présumer le lieu.</li>
+          <li>Sorties : vers Melun et Paris, vers Nemours et le Loiret ; le bon sens dépend de la crise.</li>
+        </ul>
+      </div>
+    </div>
+    <h3>Questions à poser avant tout achat</h3>
+    <div class="cols3">
+      <div class="box"><strong>Au syndic</strong><br>Surpresseur pour l'eau des étages ? Chauffage collectif dépendant de l'électricité ? Postes de relevage ? Portes et parking sans courant ? Charge admissible des planchers ? Règles du balcon ?</div>
+      <div class="box"><strong>À la mairie</strong><br>Document d'information sur les risques (DICRIM) à jour ? Plan communal de sauvegarde ? Réserve communale ? Consigne pour les sacs de toilettes de secours ?</div>
+      <div class="box"><strong>À l'assureur</strong><br>Dégâts des eaux, vandalisme, catastrophes naturelles, relogement, perte de denrées, stockage de cartouches de gaz : demandez une réponse écrite.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section id="sources">
+  <div class="wrap">
+    <p class="kicker">13 · Sources et méthode</p>
+    <h2>D'où viennent ces chiffres</h2>
+    <p class="intro">Ce site synthétise six recherches documentaires menées en novembre 2026 : scénarios et doctrine officielle ; eau et alimentation ; énergie ; santé et hygiène ; communication et sécurité civile ; budget et acquisition. Priorité aux autorités publiques françaises et européennes, puis aux organisations internationales et à la littérature scientifique.</p>
+    <div class="cols">
+      <ul class="clean">
+        <li><a href="https://www.sgdsn.gouv.fr/publications/guide-tous-responsables" target="_blank" rel="noopener">Guide « Tous responsables face aux risques », SGDSN</a></li>
+        <li><a href="https://www.securite-civile.interieur.gouv.fr/reagir/comment-se-preparer-face-aux-risques" target="_blank" rel="noopener">Se préparer face aux risques, kit d'urgence, Sécurité civile</a></li>
+        <li><a href="https://www.interieur.gouv.fr/fr/Alerte/Alerte-et-informations-a-la-population/FR-Alert" target="_blank" rel="noopener">FR-Alert, ministère de l'Intérieur</a></li>
+        <li><a href="https://www.georisques.gouv.fr/" target="_blank" rel="noopener">Géorisques, risques à votre adresse</a></li>
+        <li><a href="https://spherestandards.org/" target="_blank" rel="noopener">Standards humanitaires Sphere</a></li>
+        <li><a href="https://www.efsa.europa.eu/fr/topics/topic/dietary-reference-values" target="_blank" rel="noopener">Valeurs nutritionnelles de référence, EFSA</a></li>
+        <li><a href="https://ciqual.anses.fr/" target="_blank" rel="noopener">Table de composition des aliments Ciqual, ANSES</a></li>
+      </ul>
+      <ul class="clean">
+        <li><a href="https://www.santepubliquefrance.fr/" target="_blank" rel="noopener">Monoxyde de carbone, canicule, froid : Santé publique France</a></li>
+        <li><a href="https://re.jrc.ec.europa.eu/pvg_tools/fr/" target="_blank" rel="noopener">PVGIS, production solaire à votre adresse, Commission européenne</a></li>
+        <li><a href="https://www.inrs.fr/" target="_blank" rel="noopener">Batteries au lithium, prévention, INRS</a></li>
+        <li><a href="https://www.legifrance.gouv.fr/" target="_blank" rel="noopener">Arrêté du 23 février 2018, gaz dans les logements, Légifrance</a></li>
+        <li><a href="https://www.radiofrance.com/faq/trouver-une-frequence-fm" target="_blank" rel="noopener">Trouver une fréquence FM, Radio France</a></li>
+        <li><a href="https://www.service-public.fr/particuliers/vosdroits/F19950" target="_blank" rel="noopener">Détecteur de fumée obligatoire, Service-Public</a></li>
+        <li>Guides nationaux de Suède, Norvège, Finlande, Allemagne, Suisse, Autriche, Belgique, Pays-Bas, Royaume-Uni, Canada, États-Unis et Japon</li>
+      </ul>
+    </div>
+    <div class="note">Les valeurs marquées comme estimations sont des calculs de planification, pas des normes. Prix, fréquences et dispositifs évoluent : revérifiez avant d'acheter. Pour la santé, demandez conseil à un médecin ou un pharmacien.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="letter-spacing:.3em;color:var(--ink)">SURVIVRE</strong> · Site d'information indépendant, non officiel. Préparation civile, légale et non militarisée. Version de novembre 2026.</p>
+    <p>En cas d'urgence : 112 · Pompiers 18 · SAMU 15 · Police 17 · Prévention du suicide 3114.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var KEY="survivre.v1";
+  var store={get:function(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}},
+             set:function(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}}};
+  var saved=store.get(); saved.checks=saved.checks||{};
+  var fmt=function(n,dec){return n.toLocaleString("fr-FR",{maximumFractionDigits:dec||0,minimumFractionDigits:dec||0})};
+  var form=document.getElementById("q");
+
+  /* Thème */
+  var root=document.documentElement;
+  if(saved.theme){root.setAttribute("data-theme",saved.theme)}
+  document.getElementById("themeBtn").addEventListener("click",function(){
+    var cur=root.getAttribute("data-theme")||"dark";
+    var next=cur==="dark"?"light":"dark"; root.setAttribute("data-theme",next); saved.theme=next; store.set(saved);
+  });
+
+  /* Restauration des réponses */
+  if(saved.f){
+    Object.keys(saved.f).forEach(function(k){
+      var v=saved.f[k];
+      if(k==="ad"||k==="en"){var o=document.querySelector('.step[data-name="'+k+'"] output'); if(o)o.textContent=v; return;}
+      if(Array.isArray(v)){form.querySelectorAll('[name="'+k+'"]').forEach(function(i){i.checked=v.indexOf(i.value)>-1});return;}
+      var el=form.querySelector('[name="'+k+'"][value="'+v+'"]'); if(el)el.checked=true;
+    });
+  }
+  document.querySelectorAll(".step").forEach(function(s){
+    s.addEventListener("click",function(e){
+      var b=e.target.closest("button"); if(!b)return;
+      var o=s.querySelector("output"), name=s.dataset.name, min=name==="ad"?1:0;
+      o.textContent=Math.max(min,Math.min(8,parseInt(o.textContent,10)+parseInt(b.dataset.d,10))); update();
+    });
+  });
+
+  function read(){
+    var g=function(n){var e=form.querySelector('[name="'+n+'"]:checked');return e?e.value:null};
+    return {d:+g("d"),ad:+document.querySelector('.step[data-name="ad"] output').textContent,
+      en:+document.querySelector('.step[data-name="en"] output').textContent,
+      lg:g("lg"),cave:g("cave"),ch:g("ch"),sol:g("sol"),bain:g("bain"),vh:g("vh"),sa:g("sa"),nv:g("nv"),
+      px:Array.prototype.map.call(form.querySelectorAll('[name="px"]:checked'),function(i){return i.value})};
+  }
+
+  function calc(s){
+    var P=s.ad+s.en, d=s.d, hot=(s.sa!=="hiver"), cold=(s.sa!=="ete");
+    var wHiver={S:6.5,M:10,A:15}, wEte={S:8,M:11.5,A:16.5};
+    var wRate=hot?wEte[s.nv]:wHiver[s.nv];
+    var water=Math.max(wRate*d*P*1.1, 6/3*d*P);
+    water=Math.ceil(water/5)*5;
+    var kcalA={S:1800,M:2200,A:2600}[s.nv], kcal=(kcalA*s.ad+1500*s.en)*d*1.1;
+    var foodKg=kcal*30/72600, foodL=kcal*51/72600;
+    var toil=Math.ceil(5*d*P*1.1/5)*5;
+    var eH={S:22,M:63,A:119}, eE={S:22,M:73,A:139}, extra={S:12,M:15,A:20}[s.nv];
+    var eDay=Math.max(cold?eH[s.nv]:0, hot?eE[s.nv]:0)+extra*(P-1);
+    var eTot=eDay*d*1.15;
+    var boil={S:0.5,M:2,A:3}[s.nv]+{S:0.3,M:1,A:1.5}[s.nv]*(P-1);
+    var simmer={S:0,M:15,A:30}[s.nv];
+    var gDay=14.2*boil+38*simmer/60+((cold&&s.nv!=="S")?24*P:0);
+    var gas=gDay*d*1.2/1000, cart=Math.ceil(gas/0.22);
+    var cashBase={S:100,M:250,A:450}[s.nv], cash=cashBase+70*Math.max(0,s.ad-1)+35*s.en;
+    cash=Math.ceil(cash/10)*10;
+    return {P:P,d:d,water:water,wRate:wRate,kcal:kcal,foodKg:foodKg,foodL:foodL,toil:toil,eDay:eDay,eTot:eTot,gas:gas,cart:cart,cash:cash,hot:hot,cold:cold};
+  }
+
+  function energyAdvice(s,c){
+    if(c.eTot<=350) return "Batteries externes USB-C (environ "+fmt(Math.ceil(c.eTot/0.85/50)*50)+" Wh au total) et piles";
+    if(s.d<=7) return "Station LFP de "+fmt(Math.max(300,Math.ceil(c.eTot/0.84/100)*100))+" Wh environ, ou plusieurs batteries externes";
+    var bat=Math.max(1000,Math.ceil(c.eDay*12/0.84/100)*100);
+    if(s.sol==="oui"){
+      var wc=Math.max(200,Math.ceil(c.eDay*1.5/(c.cold?150:250)*100/50)*50);
+      return "Station LFP d'environ "+fmt(bat)+" Wh et "+fmt(wc)+" Wc de panneaux hors réseau";
+    }
+    return "Sans soleil exploitable, tout doit être stocké : environ "+fmt(Math.ceil(c.eTot/0.84/100)*100)+" Wh, ou réduire les usages";
+  }
+
+  function kpis(s,c){
+    var tot=c.water+c.foodKg;
+    var h=[
+      ["Eau",fmt(c.water)+" <small>L</small>",fmt(c.wRate,1)+" L par personne et par jour · "+fmt(c.water)+" kg à stocker"],
+      ["Nourriture",fmt(c.foodKg,0)+" <small>kg</small>",fmt(Math.round(c.kcal/1000)*1000)+" kcal · environ "+fmt(c.foodL)+" L de rangement"],
+      ["Toilettes de secours",fmt(c.toil)+" <small>sacs</small>","5 passages par personne et par jour, plus un bac fermé"],
+      ["Électricité",fmt(c.eDay)+" <small>Wh/jour</small>",energyAdvice(s,c)],
+      ["Gaz de cuisson",fmt(c.gas,1)+" <small>kg</small>","soit environ "+c.cart+" cartouches de 220 g"+(c.cold&&s.nv!=="S"?", bouillottes comprises":"")],
+      ["Espèces",fmt(c.cash)+" <small>€</small>","petites coupures, en deux cachettes"],
+      ["Masse à loger",fmt(Math.round(tot/10)*10)+" <small>kg</small>","eau et nourriture seules, à répartir au sol"],
+      ["Budget indicatif",budget(s),"un adulte, prix de novembre 2026, à revérifier"]
+    ];
+    return h.map(function(k){return '<div class="kpi"><div class="lbl">'+k[0]+'</div><div class="val">'+k[1]+'</div><div class="sub">'+k[2]+'</div></div>'}).join("");
+  }
+  function budget(s){
+    var b={3:"110 à 170",7:"300 à 470",14:"1 100 à 1 420",30:"1 450 à 1 850"}[s.d];
+    return '<span style="font-size:.72em;white-space:nowrap">'+b+' €</span>';
+  }
+
+  function alerts(s,c){
+    var a=[], W=function(t,x){a.push('<div class="warn"><b>'+t+'</b><span>'+x+'</span></div>')}, I=function(t,x){a.push('<div><b>'+t+'</b><span>'+x+'</span></div>')};
+    if(s.nv==="S"&&s.d>=14) W("Le niveau « survie » ne se tient pas des semaines","Il évite le pire quelques jours. Au-delà d'une semaine, visez au moins le niveau « minimum acceptable », surtout pour l'eau et la chaleur.");
+    if(s.lg==="haut"){
+      W("En étage, l'eau peut disparaître dès la première minute","Si l'immeuble dépend d'un surpresseur électrique, la pression tombe tout de suite. Demandez au syndic, et comptez sur votre stock dès J0.");
+      I("Ascenseur à l'arrêt","Tout se porte à pied : contenants de 5 à 10 L, plusieurs trajets, une main sur la rampe. Montez votre stock en temps normal, progressivement.");
+    }
+    if(s.lg==="bas") W("Rez-de-chaussée et premiers étages : attention au reflux","Si les étages supérieurs continuent de tirer la chasse alors que l'égout est saturé, les eaux usées remontent par les points bas. Demandez si l'immeuble a des clapets anti-retour, et vérifiez le risque d'inondation à votre adresse.");
+    if(s.lg==="maison") I("En maison","Plus de place, souvent un jardin ensoleillé : idéal pour stocker et pour le solaire. Un groupe électrogène, s'il existe, reste toujours dehors, loin des ouvertures. Vérifiez votre assainissement (réseau collectif ou fosse).");
+    if(s.lg!=="maison"&&s.cave==="non") I("Sans cave ni cellier","Tout se range dans le logement : environ "+fmt(Math.round((c.water+c.foodL)/10)*10)+" L de volume pour l'eau et la nourriture. Répartissez au sol, jamais sur le balcon, et faites vérifier la charge admissible avant de regrouper plusieurs centaines de kilos.");
+    if(c.cold){
+      var chT={elec:"Votre chauffage électrique s'arrête avec le courant.",gaz:"Une chaudière individuelle a besoin d'électricité pour son allumage et sa pompe : elle s'arrête aussi.",coll:"Le chauffage collectif dépend de pompes et d'une régulation électriques : demandez au syndic s'il est secouru.",bois:"Un poêle raccordé à un conduit et sans besoin d'électricité peut continuer à chauffer : conduit ramoné, bois sec stocké légalement, détecteur de CO obligatoire dans les faits.",nsp:"Renseignez-vous : la plupart des chauffages s'arrêtent avec l'électricité."}[s.ch];
+      W("Le froid sera votre premier risque en hiver",chT+" Prévoyez une pièce refuge, un couchage de confort 0 °C, un tapis de sol et des bouillottes. Sous 10 °C durablement, cherchez un lieu chauffé.");
+    }
+    if(c.hot) I("En canicule","Volets fermés le jour, aération la nuit, 3,5 à 4 L de boisson par jour, ventilateur USB. Les stocks d'eau et de médicaments restent loin du soleil.");
+    if(s.d>=14&&s.sol==="oui") I("Votre soleil est une ressource","Des panneaux branchés directement sur une station portable rechargent chaque jour l'essentiel. Pas de kit branché sur une prise : il s'arrête en cas de coupure. Fixation validée par la copropriété, rien qui puisse tomber.");
+    if(s.d>=14&&s.sol==="non") I("Peu de soleil","L'énergie devra être stockée : réduisez au strict nécessaire (lumière, radio, téléphone) et privilégiez les piles lithium pour les appareils critiques.");
+    if(s.bain==="oui") I("Votre baignoire, avec préavis","Une poche alimentaire de baignoire stocke 120 à 180 L d'eau d'usage. Ce n'est pas de l'eau de boisson par défaut.");
+    if(s.vh==="elec") W("Votre véhicule électrique, d'abord pour partir","Fixez un seuil de charge réservé à l'évacuation (deux destinations hors zone), gardez une carte-clé physique dans le sac. En coupure, aucune borne : ne videz pas la batterie pour quelques Wh domestiques.");
+    if(s.vh==="therm") I("Votre véhicule, pour partir","Gardez au moins un demi-réservoir en temps normal : les stations ne fonctionnent plus sans courant. Ne stockez jamais de carburant dans le logement.");
+    if(s.vh==="aucun") I("Sans véhicule","Préparez une évacuation à pied ou à vélo (15 à 25 km par jour à pied avec un sac, ordre de grandeur) et repérez les points d'accueil et de transport.");
+    if(s.en>0) I("Avec des enfants","Adaptez la nourriture (aliments connus, collations), les médicaments et les vêtements à leur âge, et prévoyez de quoi les occuper sans écran. Les quantités d'eau comptent un enfant comme un adulte.");
+    if(s.px.indexOf("trait")>-1) W("Votre traitement","Ne constituez pas une pharmacie parallèle : demandez à votre médecin un plan écrit et une ordonnance à jour, faites tourner le traitement en avance, et vérifiez sa conservation sans réfrigérateur.");
+    if(s.px.indexOf("appareil")>-1) W("Appareil médical électrique","C'est votre premier poste d'énergie : mesurez sa consommation, demandez au prestataire la conduite à tenir en coupure, et faites-vous connaître de la mairie (registre des personnes vulnérables).");
+    if(s.px.indexOf("mobilite")>-1) W("Mobilité réduite","Faites-vous connaître de la mairie et de vos voisins, organisez à l'avance l'aide pour descendre, et rapprochez stock et sac de votre lieu de vie.");
+    if(s.px.indexOf("animal")>-1) I("Avec un animal","Ajoutez son eau et sa nourriture pour la même durée, ses médicaments, et un moyen de transport pour l'évacuation.");
+    if(s.d===30) I("Trente jours","Au-delà de toutes les doctrines publiques : c'est un objectif de robustesse. Il ne doit jamais vous empêcher de partir sur ordre ou en cas de danger.");
+    return a.join("");
+  }
+
+  function items(s,c){
+    var P=s.ad+s.en, cold=c.cold, hot=c.hot, w=function(dd){return fmt(Math.ceil(Math.max(c.wRate*dd*P*1.1,2*dd*P)/5)*5)+" L"};
+    var tf=function(dd){return fmt(Math.ceil(5*dd*P*1.1/5)*5)};
+    var cartN=function(dd){return Math.max(1,Math.ceil(c.gas*dd/c.d/0.22))};
+    var L=[];
+    var add=function(p,cr,t,cond){if(cond===undefined||cond)L.push({p:p,c:cr,t:t})};
+    /* N0 */
+    add("N0","C1","Activer les alertes d'urgence (FR-Alert) sur chaque téléphone ; apprendre le signal des sirènes.");
+    add("N0","C1","Repérer les robinets d'arrêt d'eau et de gaz, le disjoncteur et toutes les sorties.");
+    add("N0","C1","Demander au syndic : surpresseur, chauffage collectif, postes de relevage, portes et parking sans courant, charge des planchers.",s.lg!=="maison");
+    add("N0","C1","Fixer vos critères « je reste / je pars » et deux destinations dans deux directions différentes.");
+    add("N0","C1","Vérifier le détecteur de fumée (NF EN 14604) et sa pile.");
+    add("N0","C2","Noter sur papier : 112, 15, 17, 18, 3114, vos contacts, les fréquences FM reçues chez vous.");
+    add("N0","C2","Désigner un voisin de contrôle (matin et soir) et un relais hors de la région.");
+    add("N0","C2","Suivre une formation aux premiers secours (PSC).");
+    add("N0","C2","Vérifier le rappel du tétanos ; prévoir une seconde paire de lunettes.");
+    add("N0","C2","Établir avec votre médecin un plan écrit pour votre traitement.",s.px.indexOf("trait")>-1);
+    add("N0","C1","Mesurer la consommation de votre appareil médical et appeler son prestataire.",s.px.indexOf("appareil")>-1);
+    add("N0","C2","Fixer le seuil de charge réservé à l'évacuation ; ranger la carte-clé physique avec les papiers.",s.vh==="elec");
+    add("N0","C2","Mesurer comment le logement se refroidit : chauffage coupé quelques heures par temps froid, température notée chaque heure.",cold);
+    add("N0","C3","Consulter Géorisques à votre adresse et le document des risques de votre commune.");
+    add("N0","C2","Inventorier ce que vous possédez déjà (lampes, sac, couvertures, réchaud, batteries) : chaque objet est un achat de moins.");
+    /* N1 */
+    add("N1","C1","Eau pour 3 jours : "+w(3)+" en bouteilles.");
+    add("N1","C1","Nourriture sans cuisson pour 3 jours, choisie parmi ce que vous mangez déjà.");
+    add("N1","C1","Radio FM à piles et piles de rechange.");
+    add("N1","C2","Lampe frontale et une seconde source de lumière, avec piles.");
+    add("N1","C2","Batterie externe USB-C chargée.");
+    add("N1","C1","Savon (1 L) et gel hydroalcoolique (500 mL).");
+    add("N1","C1","Toilettes de secours pour 3 jours : "+tf(3)+" sacs et absorbant.");
+    add("N1","C2","Trousse de premiers secours, médicaments courants vus avec un pharmacien, thermomètre.");
+    add("N1","C2","Espèces : "+fmt(c.cash)+" € en petites coupures.");
+    add("N1","C2","Copies des documents dans une pochette étanche, doubles des clés.");
+    add("N1","C2","Sac d'évacuation de 72 h près de la porte.");
+    add("N1","C2","Extincteur domestique et couverture antifeu.");
+    add("N1","C1","Couvertures et vêtements chauds en couches.",cold);
+    /* N2 */
+    add("N2","C1","Eau portée à 7 jours : "+w(7)+", dont deux bidons alimentaires de 10 L pour porter et remplir.");
+    add("N2","C1","Nourriture pour 7 jours, en stock tournant.");
+    add("N2","C1","Comprimés de désinfection (NaDCC) et un filtre à eau : deux barrières.");
+    add("N2","C1","Réchaud à cartouches utilisable selon sa notice et "+cartN(7)+" cartouches de 220 g.");
+    add("N2","C1","Détecteur de monoxyde de carbone EN 50291, dès qu'une flamme entre dans le logement.");
+    add("N2","C1","Toilettes de secours pour 7 jours : "+tf(7)+" sacs, un seau ou bac à couvercle, sacs poubelle.");
+    add("N2","C2","Sac de couchage confort 0 °C, tapis de sol isolant, bouillottes.",cold);
+    add("N2","C2","Ventilateur USB et occultation des fenêtres exposées.",hot);
+    add("N2","C2","Sels de réhydratation orale et masques FFP2.");
+    add("N2","C2","Station LFP ou batteries externes selon le calcul ci-dessus.",s.d===7);
+    add("N2","C2","Carte papier de la région et cartes téléchargées hors ligne.");
+    /* N3 */
+    add("N3","C1","Eau portée à 14 jours : "+w(14)+".");
+    add("N3","C1","Nourriture pour 14 jours, en stock tournant.");
+    add("N3","C2","Station électrique LFP d'environ 1 kWh.",s.d>=14);
+    add("N3","C2","Panneaux solaires branchés directement sur la station, fixation validée.",s.d>=14&&s.sol==="oui");
+    add("N3","C1","Cartouches portées à "+cartN(14)+".");
+    add("N3","C1","Toilettes de secours pour 14 jours : "+tf(14)+" sacs ; deux bacs à déchets hermétiques.");
+    add("N3","C2","Trousse et hygiène renforcées, linge de rechange.");
+    add("N3","C2","Premier exercice d'un week-end « sans réseaux ».");
+    /* N4 */
+    add("N4","C1","Eau portée à 30 jours : "+w(30)+", répartie au sol en plusieurs zones.");
+    add("N4","C1","Nourriture pour 30 jours (environ "+fmt(c.foodKg*30/c.d)+" kg), rotation premier entré, premier sorti.");
+    add("N4","C1","Cartouches portées à "+cartN(30)+", stockées selon leur notice.");
+    add("N4","C1","Toilettes de secours pour 30 jours : "+tf(30)+" sacs, et un emplacement décidé pour les stocker.");
+    add("N4","C2","Panneaux portés à 200 à 300 Wc.",s.sol==="oui");
+    add("N4","C2","Consommables médicaux complets pour un mois.");
+    add("N4","C2","Inventaire daté et revue tous les trois mois.");
+    var maxP={3:"N1",7:"N2",14:"N3",30:"N4"}[s.d], order=["N0","N1","N2","N3","N4"];
+    return L.filter(function(i){return order.indexOf(i.p)<=order.indexOf(maxP)});
+  }
+
+  var palNames={N0:"Sans achat",N1:"72 heures",N2:"7 jours",N3:"14 jours",N4:"30 jours"};
+  function hash(t){var h=0;for(var i=0;i<t.length;i++){h=(h*31+t.charCodeAt(i))|0}return "k"+(h>>>0).toString(36)}
+  function renderList(list){
+    var out="", groups={};
+    list.forEach(function(i){(groups[i.p]=groups[i.p]||[]).push(i)});
+    Object.keys(groups).forEach(function(p){
+      out+='<h4><span class="red">'+p+'</span><em>'+palNames[p]+'</em></h4><ul class="chk">';
+      groups[p].forEach(function(i){
+        var id=hash(p+i.t.replace(/[0-9 ,.]+/g,"")), on=!!saved.checks[id];
+        out+='<li class="'+(on?"done":"")+'"><input type="checkbox" data-id="'+id+'" '+(on?"checked":"")+' aria-label="Fait"><span class="tag '+(i.c==="C1"?"c1":"")+'">'+i.c+'</span><span class="t">'+i.t+'</span></li>';
+      });
+      out+="</ul>";
+    });
+    return out;
+  }
+
+  function update(){
+    var s=read(), c=calc(s);
+    var who=(s.ad>1?s.ad+" adultes":"1 adulte")+(s.en?", "+s.en+" enfant"+(s.en>1?"s":""):"");
+    var lgT={haut:"appartement en étage",bas:"appartement en rez-de-chaussée ou bas étage",maison:"maison"}[s.lg];
+    var nvT={S:"survie",M:"minimum acceptable",A:"amélioré"}[s.nv];
+    var saT={hiver:"hiver",ete:"été",deux:"hiver et été"}[s.sa];
+    document.getElementById("rTitle").textContent="Votre plan pour "+(s.d===3?"72 heures":s.d+" jours");
+    document.getElementById("rSub").textContent=who+" · "+lgT+" · niveau "+nvT+" · "+saT;
+    document.getElementById("kpis").innerHTML=kpis(s,c);
+    document.getElementById("alerts").innerHTML=alerts(s,c);
+    document.getElementById("pal").innerHTML=renderList(items(s,c));
+    saved.f=s; store.set(saved);
+  }
+  form.addEventListener("change",update);
+  document.getElementById("pal").addEventListener("change",function(e){
+    var i=e.target; if(!i.dataset.id)return;
+    if(i.checked)saved.checks[i.dataset.id]=1; else delete saved.checks[i.dataset.id];
+    i.closest("li").classList.toggle("done",i.checked); store.set(saved);
+  });
+  document.getElementById("resetBtn").addEventListener("click",function(){saved.checks={};store.set(saved);update()});
+
+  /* Sommaire actif */
+  var links=document.querySelectorAll("nav.menu a");
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.toggle("on",l.getAttribute("href")==="#"+e.target.id)})}})},{rootMargin:"-45% 0px -50% 0px"});
+    document.querySelectorAll("main section[id]").forEach(function(sec){io.observe(sec)});
+  }
+  update();
+})();
+</script>
+</body>
+</html>
